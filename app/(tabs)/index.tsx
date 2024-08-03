@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { View, StyleSheet, SafeAreaView } from "react-native";
-
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";

@@ -1,15 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-
-interface TodoItemProps {
-  item: {
-    id: string;
-    text: string;
-    completed: boolean;
-  };
-  toggleCompleted: (id: string) => void;
-  deleteTodo: (id: string) => void;
-}
+import { TodoItemProps } from '@/types';
 
 const TodoItem: React.FC<TodoItemProps> = ({ item, toggleCompleted, deleteTodo }) => {
   return (

@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { Button, TextInput, StyleSheet } from 'react-native';
-
-interface AddTodoProps {
-  addTodo: (text: string) => void;
-}
+import { AddTodoProps } from '@/types';
 
 const AddTodo: React.FC<AddTodoProps> = ({ addTodo }) => {
   const [text, setText] = useState('');
