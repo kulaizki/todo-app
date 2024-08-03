@@ -5,7 +5,7 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { Colors } from '@/constants/Colors';
-import TodoItem from '@/components/TodoItem';
+import TodoList from '@/components/TodoList';
 
 export default function HomeScreen() {
   const [todos, setTodos] = useState([
@@ -37,9 +37,7 @@ export default function HomeScreen() {
           <ThemedText type="title">Quests</ThemedText>
         </ThemedView>
         <ThemedText>What do we have to complete today?</ThemedText>
-        {todos.map(todo => (
-          <TodoItem key={todo.id} item={todo} toggleCompleted={toggleCompleted} deleteTodo={deleteTodo} />
-        ))}
+        <TodoList todos={todos} toggleCompleted={toggleCompleted} deleteTodo={deleteTodo} />
       </ParallaxScrollView>
     </SafeAreaView>
   );
@@ -54,12 +52,5 @@ const styles = StyleSheet.create({
   stepContainer: {
     gap: 8,
     marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
   },
 });
