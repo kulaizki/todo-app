@@ -5,37 +5,15 @@ import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { Colors } from "@/constants/Colors";
 import TodoList from "@/components/TodoList";
-import AddTodo from "@/components/AddTodo";
 import FloatingActionButton from "@/components/FloatingActionButton";
+import { toggleCompleted, deleteTodo, handleAddButtonPress } from "@/utils/todo";
+import { Todo } from "@/types/index";
 
 export default function HomeScreen() {
-  const [todos, setTodos] = useState([
+  const [todos, setTodos] = useState<Todo[]>([
     { id: "1", text: "First quest", completed: false },
     { id: "2", text: "Second quest", completed: false },
   ]);
-
-  const addTodo = (text: string) => {
-    setTodos((prevTodos) => [
-      ...prevTodos,
-      { id: Math.random().toString(), text, completed: false },
-    ]);
-  };
-
-  const toggleCompleted = (id: string) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
-    );
-  };
-
-  const deleteTodo = (id: string) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
-  };
-
-  const handleAddButtonPress = () => {
-    addTodo('New Task');
-  };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -54,14 +32,14 @@ export default function HomeScreen() {
           <ThemedText type="title">Tasks</ThemedText>
         </ThemedView>
         <ThemedText>What do we have to complete today?</ThemedText>
-        <AddTodo addTodo={addTodo} />
+        {/* <AddTodo addTodo={(text) => addTodo(todos, setTodos, text)} /> */}
         <TodoList
           todos={todos}
-          toggleCompleted={toggleCompleted}
-          deleteTodo={deleteTodo}
+          toggleCompleted={(id) => toggleCompleted(todos, setTodos, id)}
+          deleteTodo={(id) => deleteTodo(todos, setTodos, id)}
         />
       </ParallaxScrollView>
-    <FloatingActionButton onPress={handleAddButtonPress} />
+      <FloatingActionButton onPress={() => handleAddButtonPress(todos, setTodos)} />
     </SafeAreaView>
   );
 }
