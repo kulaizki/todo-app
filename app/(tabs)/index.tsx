@@ -6,6 +6,7 @@ import { ThemedView } from "@/components/ThemedView";
 import { Colors } from "@/constants/Colors";
 import TodoList from "@/components/TodoList";
 import AddTodo from "@/components/AddTodo";
+import FloatingActionButton from "@/components/FloatingActionButton";
 
 export default function HomeScreen() {
   const [todos, setTodos] = useState([
@@ -32,6 +33,10 @@ export default function HomeScreen() {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
+  const handleAddButtonPress = () => {
+    addTodo('New Task');
+  };
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ParallaxScrollView
@@ -56,6 +61,7 @@ export default function HomeScreen() {
           deleteTodo={deleteTodo}
         />
       </ParallaxScrollView>
+    <FloatingActionButton onPress={handleAddButtonPress} />
     </SafeAreaView>
   );
 }
