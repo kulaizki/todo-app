@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { View, StyleSheet, SafeAreaView } from "react-native";
 
 import ParallaxScrollView from "@/components/ParallaxScrollView";
