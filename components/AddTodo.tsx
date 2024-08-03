@@ -7,6 +7,7 @@ interface AddTodoProps {
 
 const AddTodo: React.FC<AddTodoProps> = ({ addTodo }) => {
   const [text, setText] = useState('');
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleAddTodo = () => {
     addTodo(text);
@@ -20,8 +21,10 @@ const AddTodo: React.FC<AddTodoProps> = ({ addTodo }) => {
         value={text} 
         onChangeText={setText} 
         placeholder="New Task" 
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
       />
-      <Button title="Add Quest" onPress={handleAddTodo} />
+      {isFocused && <Button title="Add Task" onPress={handleAddTodo} />}
     </>
   );
 };
@@ -29,7 +32,6 @@ const AddTodo: React.FC<AddTodoProps> = ({ addTodo }) => {
 const styles = StyleSheet.create({
   input: {
     height: 40, 
-    padding: 10,
   },
 });
 

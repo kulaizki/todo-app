@@ -47,7 +47,7 @@ export default function HomeScreen() {
         }
       >
         <ThemedView style={styles.titleContainer}>
-          <ThemedText type="title">Quests</ThemedText>
+          <ThemedText type="title">Tasks</ThemedText>
         </ThemedView>
         <ThemedText>What do we have to complete today?</ThemedText>
         <AddTodo addTodo={addTodo} />
