@@ -1,4 +1,4 @@
-import { View, StatusBar, StyleSheet, Platform, SafeAreaView } from 'react-native';
+import { View, StyleSheet, SafeAreaView } from 'react-native';
 
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
@@ -14,12 +14,12 @@ export default function HomeScreen() {
           <View style={{
             backgroundColor: Colors.light.primary,
             height: 200,
-            paddingTop: Platform.OS === 'ios' ? StatusBar.currentHeight : 0
           }}/>
         }>
         <ThemedView style={styles.titleContainer}>
           <ThemedText type="title">Quests</ThemedText>
         </ThemedView>
+        <ThemedText>What do we have to complete today?</ThemedText>
       </ParallaxScrollView>
     </SafeAreaView>
   );
