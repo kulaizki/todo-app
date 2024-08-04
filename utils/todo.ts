@@ -10,7 +10,12 @@ export const addTodo = (
 ) => {
   setTodos((prevTodos) => [
     ...prevTodos,
-    { id: Math.random().toString(), text, completed: false },
+    {
+      id: Math.random().toString(),
+      text,
+      completed: false,
+      createdAt: new Date(), // Add current date as createdAt
+    },
   ]);
 };
 

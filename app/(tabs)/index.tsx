@@ -1,24 +1,36 @@
 import { useState, useRef } from 'react';
-import { View, TextInput, StyleSheet, SafeAreaView } from 'react-native'; 
+import { View, TextInput, StyleSheet, SafeAreaView, Button } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { Colors } from '@/constants/Colors';
 import TodoList from '@/components/TodoList';
 import FloatingActionButton from '@/components/FloatingActionButton';
-import { toggleCompleted, deleteTodo, handleAddButtonPress, handleSaveTask } from '@/utils/todo';
+import { toggleCompleted, handleAddButtonPress, handleSaveTask } from '@/utils/todo';
 import { Todo } from '@/types/index';
 
 export default function HomeScreen() {
   const [todos, setTodos] = useState<Todo[]>([
-    { id: '1', text: 'First quest', completed: false },
-    { id: '2', text: 'Second quest', completed: false },
-    { id: '3', text: 'Third quest', completed: false },
+    { id: '1', text: 'First quest', completed: false, createdAt: new Date() },
+    { id: '2', text: 'Second quest', completed: false, createdAt: new Date() },
+    { id: '3', text: 'Third quest', completed: false, createdAt: new Date() },
   ]);
 
   const [inputText, setInputText] = useState<string>('');
   const [isAdding, setIsAdding] = useState<boolean>(false);
+  const [sortOption, setSortOption] = useState<'date' | 'completion'>('date');
   const inputRef = useRef<TextInput>(null);
+
+  // Sort todos based on the selected option
+  const sortedTodos = [...todos].sort((a, b) => {
+    if (sortOption === 'date') {
+      // Sort by creation date (newest first)
+      return b.createdAt.getTime() - a.createdAt.getTime();
+    } else {
+      // Sort by completion status
+      return Number(a.completed) - Number(b.completed);
+    }
+  });
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -50,10 +62,13 @@ export default function HomeScreen() {
             />
           </View>
         )}
+        <View style={styles.sortButtons}>
+          <Button title="Sort by Date" onPress={() => setSortOption('date')} />
+          <Button title="Sort by Completion" onPress={() => setSortOption('completion')} />
+        </View>
         <TodoList
-          todos={todos}
+          todos={sortedTodos}
           toggleCompleted={(id) => toggleCompleted(todos, setTodos, id)}
-          deleteTodo={(id) => deleteTodo(todos, setTodos, id)}
         />
       </ParallaxScrollView>
       <FloatingActionButton onPress={() => handleAddButtonPress(setIsAdding, inputRef)} />
@@ -77,5 +92,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 4,
     paddingHorizontal: 8,
+  },
+  sortButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginVertical: 10,
   },
 });
