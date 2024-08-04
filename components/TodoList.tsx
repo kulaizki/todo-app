@@ -15,7 +15,7 @@ const TodoList: React.FC<TodoListProps> = ({
           key={todo.id}
           item={todo}
           toggleCompleted={toggleCompleted}
-          editTodo={editTodo} // Pass editTodo to TodoItem
+          editTodo={editTodo}
         />
       ))}
     </SafeAreaView>

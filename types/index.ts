@@ -20,3 +20,9 @@ export interface TodoListProps {
   toggleCompleted: (id: string) => void;
   editTodo: (id: string, newText: string) => void;
 }
+
+export interface SortButtonProps {
+  title: string;
+  onPress: () => void;
+  isActive: boolean;
+}

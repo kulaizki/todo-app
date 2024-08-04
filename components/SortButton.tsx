@@ -1,14 +1,13 @@
-import React from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
-import { Colors } from '@/constants/Colors';
+import React from "react";
+import { TouchableOpacity, Text, StyleSheet } from "react-native";
+import { Colors } from "@/constants/Colors";
+import { SortButtonProps } from "@/types";
 
-interface SortButtonProps {
-  title: string;
-  onPress: () => void;
-  isActive: boolean;
-}
-
-const SortButton: React.FC<SortButtonProps> = ({ title, onPress, isActive }) => {
+const SortButton: React.FC<SortButtonProps> = ({
+  title,
+  onPress,
+  isActive,
+}) => {
   return (
     <TouchableOpacity
       style={[styles.button, isActive && styles.activeButton]}
@@ -23,9 +22,9 @@ const styles = StyleSheet.create({
   button: {
     paddingVertical: 8,
     paddingHorizontal: 20,
-    backgroundColor: 'transparent',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "transparent",
+    alignItems: "center",
+    justifyContent: "center",
   },
   activeButton: {
     backgroundColor: Colors.light.primary,
@@ -35,7 +34,7 @@ const styles = StyleSheet.create({
     color: Colors.light.primary,
   },
   activeText: {
-    color: '#fff',
+    color: "#fff",
   },
 });
 

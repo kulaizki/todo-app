@@ -1,10 +1,20 @@
 // TodoItem.tsx
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
-import { TodoItemProps } from '@/types';
-import { Colors } from '@/constants/Colors';
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  TextInput,
+} from "react-native";
+import { TodoItemProps } from "@/types";
+import { Colors } from "@/constants/Colors";
 
-const TodoItem: React.FC<TodoItemProps> = ({ item, toggleCompleted, editTodo }) => {
+const TodoItem: React.FC<TodoItemProps> = ({
+  item,
+  toggleCompleted,
+  editTodo,
+}) => {
   const [isEditing, setIsEditing] = useState(false);
   const [newText, setNewText] = useState(item.text);
 
@@ -47,11 +57,11 @@ const TodoItem: React.FC<TodoItemProps> = ({ item, toggleCompleted, editTodo }) 
 
 const styles = StyleSheet.create({
   item: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     padding: 12,
     borderBottomWidth: 1,
-    borderBottomColor: '#ddd',
+    borderBottomColor: "#ddd",
   },
   textContainer: {
     flex: 1,
@@ -61,8 +71,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   completed: {
-    textDecorationLine: 'line-through',
-    color: '#aaa',
+    textDecorationLine: "line-through",
+    color: "#aaa",
   },
   toggle: {
     width: 20,
@@ -70,9 +80,9 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 2,
     borderColor: Colors.light.primary,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'transparent',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "transparent",
   },
   innerCircle: {
     width: 14,

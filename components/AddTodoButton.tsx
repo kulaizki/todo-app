@@ -1,10 +1,7 @@
-import React from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
-import { Colors } from '@/constants/Colors';
-
-type AddTodoButtonProps = {
-  onPress: () => void;
-};
+import React from "react";
+import { TouchableOpacity, Text, StyleSheet } from "react-native";
+import { Colors } from "@/constants/Colors";
+import { AddTodoButtonProps } from "@/types";
 
 const AddTodoButton: React.FC<AddTodoButtonProps> = ({ onPress }) => {
   return (
@@ -16,16 +13,16 @@ const AddTodoButton: React.FC<AddTodoButtonProps> = ({ onPress }) => {
 
 const styles = StyleSheet.create({
   fab: {
-    position: 'absolute',
+    position: "absolute",
     right: 16,
     bottom: 16,
     width: 56,
     height: 56,
     borderRadius: 28,
     backgroundColor: Colors.light.primary,
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: '#000',
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.8,
     shadowRadius: 2,
@@ -33,7 +30,7 @@ const styles = StyleSheet.create({
   },
   fabText: {
     fontSize: 24,
-    color: '#fff',
+    color: "#fff",
   },
 });
 
