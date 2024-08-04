@@ -9,6 +9,7 @@ export interface TodoItemProps {
     completed: boolean;
   };
   toggleCompleted: (id: string) => void;
+  editTodo: (id: string, newText: string) => void;
 }
 
 export interface Todo {
@@ -21,4 +22,5 @@ export interface Todo {
 export interface TodoListProps {
   todos: Todo[];
   toggleCompleted: (id: string) => void;
+  editTodo: (id: string, newText: string) => void;
 }

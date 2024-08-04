@@ -63,3 +63,15 @@ export const handleSaveTask = (
     setIsAdding(false);
   }
 };
+
+// New editTodo function
+export const editTodo = (
+  id: string,
+  newText: string,
+  todos: Todo[],
+  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>
+) => {
+  setTodos(todos.map(todo =>
+    todo.id === id ? { ...todo, text: newText } : todo
+  ));
+};

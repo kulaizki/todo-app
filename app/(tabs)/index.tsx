@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { View, TextInput, StyleSheet, SafeAreaView } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
@@ -6,7 +6,7 @@ import { ThemedView } from '@/components/ThemedView';
 import { Colors } from '@/constants/Colors';
 import TodoList from '@/components/TodoList';
 import FloatingActionButton from '@/components/FloatingActionButton';
-import { toggleCompleted, handleAddButtonPress, handleSaveTask } from '@/utils/todo';
+import { toggleCompleted, handleAddButtonPress, handleSaveTask, editTodo } from '@/utils/todo';
 import { Todo } from '@/types/index';
 import SortButton from '@/components/SortButton';
 
@@ -60,7 +60,7 @@ export default function HomeScreen() {
             />
           </View>
         )}
-        <View style={styles.sortButtonsContainer}>
+        <View style={styles.sortButtons}>
           <SortButton
             title="Sort by Date"
             onPress={() => setSortOption('date')}
@@ -75,6 +75,7 @@ export default function HomeScreen() {
         <TodoList
           todos={sortedTodos}
           toggleCompleted={(id) => toggleCompleted(todos, setTodos, id)}
+          editTodo={(id, newText) => editTodo(id, newText, todos, setTodos)}
         />
       </ParallaxScrollView>
       <FloatingActionButton onPress={() => handleAddButtonPress(setIsAdding, inputRef)} />
@@ -98,10 +99,9 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     paddingHorizontal: 8,
   },
-  sortButtonsContainer: {
+  sortButtons: {
     flexDirection: 'row',
-    borderColor: Colors.light.primary,
-    borderWidth: 1,
-    borderRadius: 4,
+    justifyContent: 'space-around',
+    marginVertical: 10,
   },
 });
