@@ -2,7 +2,6 @@ import { Todo } from '@/types/index';
 import { TextInput } from 'react-native';
 import React from 'react';
 
-// Existing functions
 export const addTodo = (
   todos: Todo[],
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>,
@@ -74,4 +73,17 @@ export const editTodo = (
   setTodos(todos.map(todo =>
     todo.id === id ? { ...todo, text: newText } : todo
   ));
+};
+
+export const sortTodos = (
+  todos: Todo[],
+  sortOption: 'date' | 'completion'
+): Todo[] => {
+  return [...todos].sort((a, b) => {
+    if (sortOption === 'date') {
+      return b.createdAt.getTime() - a.createdAt.getTime(); // Newest first
+    } else {
+      return Number(a.completed) - Number(b.completed); // Completed items last
+    }
+  });
 };

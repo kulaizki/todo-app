@@ -1,3 +1,4 @@
+// HomeScreen.tsx
 import React, { useState, useRef } from 'react';
 import { View, TextInput, StyleSheet, SafeAreaView } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
@@ -6,9 +7,9 @@ import { ThemedView } from '@/components/ThemedView';
 import { Colors } from '@/constants/Colors';
 import TodoList from '@/components/TodoList';
 import FloatingActionButton from '@/components/FloatingActionButton';
-import { toggleCompleted, handleAddButtonPress, handleSaveTask, editTodo } from '@/utils/todo';
+import { toggleCompleted, handleAddButtonPress, handleSaveTask, editTodo, sortTodos } from '@/utils/todo';
 import { Todo } from '@/types/index';
-import SortButton from '@/components/SortButton';
+import SortButtonsContainer from '@/components/SortButtonsContainer';
 
 export default function HomeScreen() {
   const [todos, setTodos] = useState<Todo[]>([
@@ -22,13 +23,7 @@ export default function HomeScreen() {
   const [sortOption, setSortOption] = useState<'date' | 'completion'>('date');
   const inputRef = useRef<TextInput>(null);
 
-  const sortedTodos = [...todos].sort((a, b) => {
-    if (sortOption === 'date') {
-      return b.createdAt.getTime() - a.createdAt.getTime(); // Newest first
-    } else {
-      return Number(a.completed) - Number(b.completed); // Completed items last
-    }
-  });
+  const sortedTodos = sortTodos(todos, sortOption);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -60,18 +55,10 @@ export default function HomeScreen() {
             />
           </View>
         )}
-        <View style={styles.sortButtons}>
-          <SortButton
-            title="Sort by Date"
-            onPress={() => setSortOption('date')}
-            isActive={sortOption === 'date'}
-          />
-          <SortButton
-            title="Sort by Completion"
-            onPress={() => setSortOption('completion')}
-            isActive={sortOption === 'completion'}
-          />
-        </View>
+        <SortButtonsContainer
+          sortOption={sortOption}
+          setSortOption={setSortOption}
+        />
         <TodoList
           todos={sortedTodos}
           toggleCompleted={(id) => toggleCompleted(todos, setTodos, id)}
@@ -98,10 +85,5 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 4,
     paddingHorizontal: 8,
-  },
-  sortButtons: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginVertical: 10,
   },
 });
