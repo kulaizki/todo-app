@@ -6,12 +6,14 @@ import { ThemedView } from "@/components/ThemedView";
 import { Colors } from "@/constants/Colors";
 import TodoList from "@/components/TodoList";
 import AddTodoButton from "@/components/AddTodoButton";
+import ClearCompletedButton from "@/components/ClearCompletedButton";
 import {
   toggleCompleted,
   handleAddButtonPress,
   handleSaveTask,
   editTodo,
   sortTodos,
+  clearCompletedTasks,
 } from "@/utils/todo";
 import { Todo } from "@/types/index";
 import SortButtonsContainer from "@/components/SortButtonsContainer";
@@ -80,6 +82,9 @@ export default function HomeScreen() {
       </ParallaxScrollView>
       <AddTodoButton
         onPress={() => handleAddButtonPress(setIsAdding, inputRef)}
+      />
+      <ClearCompletedButton
+        onPress={() => clearCompletedTasks(todos, setTodos)}
       />
     </SafeAreaView>
   );

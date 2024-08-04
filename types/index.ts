@@ -35,3 +35,7 @@ export interface SortButtonsContainerProps {
   sortOption: 'time' | 'completion';
   setSortOption: React.Dispatch<React.SetStateAction<'time' | 'completion'>>;
 }
+
+export interface ClearCompletedButtonProps {
+  onPress: () => void;
+}

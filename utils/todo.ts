@@ -85,3 +85,10 @@ export const sortTodos = (
     }
   });
 };
+
+export const clearCompletedTasks = (
+  todos: Todo[],
+  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>
+) => {
+  setTodos(todos.filter(todo => !todo.completed));
+};
