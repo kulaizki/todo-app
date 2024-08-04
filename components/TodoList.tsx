@@ -6,7 +6,6 @@ import { TodoListProps } from "@/types";
 const TodoList: React.FC<TodoListProps> = ({
   todos,
   toggleCompleted,
-  deleteTodo,
 }) => {
   return (
     <SafeAreaView>
@@ -15,7 +14,6 @@ const TodoList: React.FC<TodoListProps> = ({
           key={todo.id}
           item={todo}
           toggleCompleted={toggleCompleted}
-          deleteTodo={deleteTodo}
         />
       ))}
     </SafeAreaView>

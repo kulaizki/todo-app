@@ -1,12 +1,12 @@
-import React, { useState, useRef } from 'react';
-import { View, TextInput, StyleSheet, SafeAreaView } from 'react-native';
+import { useState, useRef } from 'react';
+import { View, TextInput, StyleSheet, SafeAreaView } from 'react-native'; 
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { Colors } from '@/constants/Colors';
 import TodoList from '@/components/TodoList';
 import FloatingActionButton from '@/components/FloatingActionButton';
-import { toggleCompleted, deleteTodo, addTodo } from '@/utils/todo';
+import { toggleCompleted, deleteTodo, handleAddButtonPress, handleSaveTask } from '@/utils/todo';
 import { Todo } from '@/types/index';
 
 export default function HomeScreen() {
@@ -19,22 +19,6 @@ export default function HomeScreen() {
   const [inputText, setInputText] = useState<string>('');
   const [isAdding, setIsAdding] = useState<boolean>(false);
   const inputRef = useRef<TextInput>(null);
-
-  const handleAddButtonPress = () => {
-    setIsAdding(true);
-    // Delay focusing to ensure the component is rendered
-    setTimeout(() => {
-      inputRef.current?.focus();
-    }, 100);
-  };
-
-  const handleSaveTask = () => {
-    if (inputText.trim()) {
-      addTodo(todos, setTodos, inputText);
-      setInputText('');
-      setIsAdding(false);
-    }
-  };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -61,7 +45,7 @@ export default function HomeScreen() {
               onChangeText={setInputText}
               placeholder="Enter task description"
               style={styles.input}
-              onSubmitEditing={handleSaveTask}
+              onSubmitEditing={() => handleSaveTask(inputText, setInputText, setIsAdding, todos, setTodos)}
               returnKeyType="done"
             />
           </View>
@@ -72,7 +56,7 @@ export default function HomeScreen() {
           deleteTodo={(id) => deleteTodo(todos, setTodos, id)}
         />
       </ParallaxScrollView>
-      <FloatingActionButton onPress={handleAddButtonPress} />
+      <FloatingActionButton onPress={() => handleAddButtonPress(setIsAdding, inputRef)} />
     </SafeAreaView>
   );
 }

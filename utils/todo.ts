@@ -1,5 +1,8 @@
 import { Todo } from '@/types/index';
+import { TextInput } from 'react-native';
+import React from 'react';
 
+// Existing functions
 export const addTodo = (
   todos: Todo[],
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>,
@@ -31,9 +34,27 @@ export const deleteTodo = (
   setTodos(todos.filter((todo) => todo.id !== id));
 };
 
+// New functions
 export const handleAddButtonPress = (
-  todos: Todo[],
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>
+  setIsAdding: React.Dispatch<React.SetStateAction<boolean>>,
+  inputRef: React.RefObject<TextInput>
 ) => {
-  addTodo(todos, setTodos, 'New Task');
+  setIsAdding(true);
+  setTimeout(() => {
+    inputRef.current?.focus();
+  }, 100);
+};
+
+export const handleSaveTask = (
+  inputText: string,
+  setInputText: React.Dispatch<React.SetStateAction<string>>,
+  setIsAdding: React.Dispatch<React.SetStateAction<boolean>>,
+  todos: Todo[],
+  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>,
+) => {
+  if (inputText.trim()) {
+    addTodo(todos, setTodos, inputText);
+    setInputText('');
+    setIsAdding(false);
+  }
 };
