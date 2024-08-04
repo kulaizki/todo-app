@@ -1,7 +1,3 @@
-export interface AddTodoProps {
-  addTodo: (text: string) => void;
-}
-
 export interface TodoItemProps {
   item: {
     id: string;

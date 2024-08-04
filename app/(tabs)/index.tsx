@@ -1,4 +1,3 @@
-// HomeScreen.tsx
 import React, { useState, useRef } from 'react';
 import { View, TextInput, StyleSheet, SafeAreaView } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
@@ -6,7 +5,7 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { Colors } from '@/constants/Colors';
 import TodoList from '@/components/TodoList';
-import FloatingActionButton from '@/components/FloatingActionButton';
+import AddTodoButton from '@/components/AddTodoButton';
 import { toggleCompleted, handleAddButtonPress, handleSaveTask, editTodo, sortTodos } from '@/utils/todo';
 import { Todo } from '@/types/index';
 import SortButtonsContainer from '@/components/SortButtonsContainer';
@@ -65,7 +64,7 @@ export default function HomeScreen() {
           editTodo={(id, newText) => editTodo(id, newText, todos, setTodos)}
         />
       </ParallaxScrollView>
-      <FloatingActionButton onPress={() => handleAddButtonPress(setIsAdding, inputRef)} />
+      <AddTodoButton onPress={() => handleAddButtonPress(setIsAdding, inputRef)} />
     </SafeAreaView>
   );
 }

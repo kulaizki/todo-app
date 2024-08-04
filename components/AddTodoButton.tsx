@@ -2,11 +2,11 @@ import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { Colors } from '@/constants/Colors';
 
-type FloatingActionButtonProps = {
+type AddTodoButtonProps = {
   onPress: () => void;
 };
 
-const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({ onPress }) => {
+const AddTodoButton: React.FC<AddTodoButtonProps> = ({ onPress }) => {
   return (
     <TouchableOpacity style={styles.fab} onPress={onPress}>
       <Text style={styles.fabText}>+</Text>
@@ -37,4 +37,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FloatingActionButton;
+export default AddTodoButton;
