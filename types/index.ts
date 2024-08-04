@@ -26,3 +26,12 @@ export interface SortButtonProps {
   onPress: () => void;
   isActive: boolean;
 }
+
+export interface AddTodoButtonProps {
+  onPress: () => void;
+}
+
+export interface SortButtonsContainerProps {
+  sortOption: 'date' | 'completion';
+  setSortOption: React.Dispatch<React.SetStateAction<'date' | 'completion'>>;
+}
