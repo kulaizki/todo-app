@@ -1,21 +1,24 @@
-import React from 'react';
-import { FlatList } from 'react-native';
-import TodoItem from '@/components/TodoItem';
-import { TodoListProps } from '@/types';
+import React from "react";
+import { SafeAreaView } from "react-native";
+import TodoItem from "@/components/TodoItem";
+import { TodoListProps } from "@/types";
 
-const TodoList: React.FC<TodoListProps> = ({ todos, toggleCompleted, deleteTodo }) => {
+const TodoList: React.FC<TodoListProps> = ({
+  todos,
+  toggleCompleted,
+  deleteTodo,
+}) => {
   return (
-    <FlatList
-      data={todos}
-      keyExtractor={(item) => item.id.toString()}
-      renderItem={({ item }) => (
+    <SafeAreaView>
+      {todos.map(todo => (
         <TodoItem
-          item={item}
+          key={todo.id}
+          item={todo}
           toggleCompleted={toggleCompleted}
           deleteTodo={deleteTodo}
         />
-      )}
-    />
+      ))}
+    </SafeAreaView>
   );
 };
 
