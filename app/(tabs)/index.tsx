@@ -60,7 +60,7 @@ export default function HomeScreen() {
             />
           </View>
         )}
-        <View style={styles.sortButtons}>
+        <View style={styles.sortButtonsContainer}>
           <SortButton
             title="Sort by Date"
             onPress={() => setSortOption('date')}
@@ -90,7 +90,6 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     backgroundColor: 'white',
-    padding: 4,
   },
   input: {
     height: 40,
@@ -99,9 +98,10 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     paddingHorizontal: 8,
   },
-  sortButtons: {
+  sortButtonsContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginVertical: 10,
+    borderColor: Colors.light.primary,
+    borderWidth: 1,
+    borderRadius: 4,
   },
 });
