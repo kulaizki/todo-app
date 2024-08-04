@@ -26,13 +26,13 @@ const styles = StyleSheet.create({
   item: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 15,
+    padding: 4,
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
   },
   textContainer: {
     flex: 1,
-    marginLeft: 10,
+    marginLeft: 16,
   },
   text: {
     fontSize: 18,
@@ -46,11 +46,11 @@ const styles = StyleSheet.create({
     color: 'red',
   },
   toggle: {
-    width: 24,
-    height: 24,
+    width: 20,
+    height: 20,
     borderRadius: 12,
     borderWidth: 2,
-    borderColor: '#000',
+    borderColor: '#033c87',
     justifyContent: 'center',
     alignItems: 'center',
   },
