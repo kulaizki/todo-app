@@ -32,6 +32,6 @@ export interface AddTodoButtonProps {
 }
 
 export interface SortButtonsContainerProps {
-  sortOption: 'date' | 'completion';
-  setSortOption: React.Dispatch<React.SetStateAction<'date' | 'completion'>>;
+  sortOption: 'time' | 'completion';
+  setSortOption: React.Dispatch<React.SetStateAction<'time' | 'completion'>>;
 }

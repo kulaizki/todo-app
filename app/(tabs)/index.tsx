@@ -20,7 +20,7 @@ export default function HomeScreen() {
   const [todos, setTodos] = useState<Todo[]>([
     { id: "1", text: "First quest", completed: false, createdAt: new Date() },
     { id: "2", text: "Second quest", completed: false, createdAt: new Date() },
-    { id: "3", text: "Third quest", completed: false, createdAt: new Date() },
+    { id: "3", text: "This description is super super duper super duper super super super long", completed: false, createdAt: new Date() },
   ]);
 
   const [inputText, setInputText] = useState<string>("");

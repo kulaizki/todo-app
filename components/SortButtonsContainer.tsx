@@ -10,9 +10,9 @@ const SortButtonsContainer: React.FC<SortButtonsContainerProps> = ({
   return (
     <View style={styles.container}>
       <SortButton
-        title="Sort by Date"
-        onPress={() => setSortOption("date")}
-        isActive={sortOption === "date"}
+        title="Sort by Time"
+        onPress={() => setSortOption("time")}
+        isActive={sortOption === "time"}
       />
       <SortButton
         title="Sort by Completion"

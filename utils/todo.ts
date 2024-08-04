@@ -75,10 +75,10 @@ export const editTodo = (
 
 export const sortTodos = (
   todos: Todo[],
-  sortOption: 'date' | 'completion'
+  sortOption: 'time' | 'completion'
 ): Todo[] => {
   return [...todos].sort((a, b) => {
-    if (sortOption === 'date') {
+    if (sortOption === 'time') {
       return b.createdAt.getTime() - a.createdAt.getTime(); // Newest first
     } else {
       return Number(a.completed) - Number(b.completed); // Completed items last
