@@ -13,7 +13,7 @@ export const addTodo = (
       id: Math.random().toString(),
       text,
       completed: false,
-      createdAt: new Date(), // Add current date as createdAt
+      createdAt: new Date(),
     },
   ]);
 };
@@ -38,7 +38,6 @@ export const deleteTodo = (
   setTodos(todos.filter((todo) => todo.id !== id));
 };
 
-// New functions
 export const handleAddButtonPress = (
   setIsAdding: React.Dispatch<React.SetStateAction<boolean>>,
   inputRef: React.RefObject<TextInput>
@@ -63,7 +62,6 @@ export const handleSaveTask = (
   }
 };
 
-// New editTodo function
 export const editTodo = (
   id: string,
   newText: string,
