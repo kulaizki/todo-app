@@ -1,5 +1,5 @@
-import { useState, useRef } from 'react';
-import { View, TextInput, StyleSheet, SafeAreaView, Button } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { View, TextInput, StyleSheet, SafeAreaView } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
@@ -8,6 +8,7 @@ import TodoList from '@/components/TodoList';
 import FloatingActionButton from '@/components/FloatingActionButton';
 import { toggleCompleted, handleAddButtonPress, handleSaveTask } from '@/utils/todo';
 import { Todo } from '@/types/index';
+import SortButton from '@/components/SortButton';
 
 export default function HomeScreen() {
   const [todos, setTodos] = useState<Todo[]>([
@@ -21,14 +22,11 @@ export default function HomeScreen() {
   const [sortOption, setSortOption] = useState<'date' | 'completion'>('date');
   const inputRef = useRef<TextInput>(null);
 
-  // Sort todos based on the selected option
   const sortedTodos = [...todos].sort((a, b) => {
     if (sortOption === 'date') {
-      // Sort by creation date (newest first)
-      return b.createdAt.getTime() - a.createdAt.getTime();
+      return b.createdAt.getTime() - a.createdAt.getTime(); // Newest first
     } else {
-      // Sort by completion status
-      return Number(a.completed) - Number(b.completed);
+      return Number(a.completed) - Number(b.completed); // Completed items last
     }
   });
 
@@ -63,8 +61,16 @@ export default function HomeScreen() {
           </View>
         )}
         <View style={styles.sortButtons}>
-          <Button title="Sort by Date" onPress={() => setSortOption('date')} />
-          <Button title="Sort by Completion" onPress={() => setSortOption('completion')} />
+          <SortButton
+            title="Sort by Date"
+            onPress={() => setSortOption('date')}
+            isActive={sortOption === 'date'}
+          />
+          <SortButton
+            title="Sort by Completion"
+            onPress={() => setSortOption('completion')}
+            isActive={sortOption === 'completion'}
+          />
         </View>
         <TodoList
           todos={sortedTodos}
@@ -83,7 +89,7 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   inputContainer: {
-    backgroundColor: 'white', 
+    backgroundColor: 'white',
     padding: 4,
   },
   input: {
