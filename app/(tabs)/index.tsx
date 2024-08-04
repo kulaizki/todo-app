@@ -25,7 +25,7 @@ export default function HomeScreen() {
 
   const [inputText, setInputText] = useState<string>("");
   const [isAdding, setIsAdding] = useState<boolean>(false);
-  const [sortOption, setSortOption] = useState<"date" | "completion">("date");
+  const [sortOption, setSortOption] = useState<"time" | "completion">("time");
   const inputRef = useRef<TextInput>(null);
 
   const sortedTodos = sortTodos(todos, sortOption);
