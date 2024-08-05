@@ -50,3 +50,8 @@ export interface DeleteButtonProps {
   todos: Todo[];
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }
+
+export interface SortDropdownProps {
+  sortOption: 'time' | 'completion';
+  setSortOption: React.Dispatch<React.SetStateAction<'time' | 'completion'>>;
+}

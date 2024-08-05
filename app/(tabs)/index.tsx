@@ -17,7 +17,7 @@ import {
   getTodosFromStorage
 } from "@/utils/todo";
 import { Todo } from "@/types/index";
-import SortButtonsContainer from "@/components/SortButtonsContainer";
+import SortDropdown from "@/components/SortDropdown"; 
 
 export default function HomeScreen() {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -52,7 +52,7 @@ export default function HomeScreen() {
         <ThemedView style={styles.titleContainer}>
           <ThemedText type="title">Tasks</ThemedText>
         </ThemedView>
-        <ThemedText>What do we have to complete today?</ThemedText>
+        <ThemedText type='defaultSemiBold'>What do we have to complete today?</ThemedText>
         {isAdding && (
           <View style={styles.inputContainer}>
             <TextInput
@@ -74,7 +74,7 @@ export default function HomeScreen() {
             />
           </View>
         )}
-        <SortButtonsContainer
+        <SortDropdown
           sortOption={sortOption}
           setSortOption={setSortOption}
         />
