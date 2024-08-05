@@ -14,10 +14,10 @@ import {
   editTodo,
   sortTodos,
   clearCompletedTasks,
-  getTodosFromStorage
+  getTodosFromStorage,
 } from "@/utils/todo";
 import { Todo } from "@/types/index";
-import SortDropdown from "@/components/SortDropdown"; 
+import SortDropdown from "@/components/SortDropdown";
 
 export default function HomeScreen() {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -52,6 +52,7 @@ export default function HomeScreen() {
         <ThemedView>
           <ThemedText type="title">Tasks</ThemedText>
         </ThemedView>
+        <SortDropdown sortOption={sortOption} setSortOption={setSortOption} />
         {isAdding && (
           <View style={styles.inputContainer}>
             <TextInput
@@ -73,15 +74,11 @@ export default function HomeScreen() {
             />
           </View>
         )}
-        <SortDropdown
-          sortOption={sortOption}
-          setSortOption={setSortOption}
-        />
         <TodoList
           todos={sortedTodos}
           toggleCompleted={(id) => toggleCompleted(todos, setTodos, id)}
           editTodo={(id, newText) => editTodo(id, newText, todos, setTodos)}
-          setTodos={setTodos} // Pass setTodos here
+          setTodos={setTodos}
         />
       </ParallaxScrollView>
       <AddTodoButton
@@ -102,7 +99,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.light.primary,
   },
   input: {
-    height: 40,
+    height: 48,
     paddingHorizontal: 8,
     fontSize: 16,
   },

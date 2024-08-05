@@ -1,46 +1,56 @@
 import React from "react";
 import RNPickerSelect from 'react-native-picker-select';
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Colors } from "@/constants/Colors";
 import { SortDropdownProps } from "@/types";
 
 const SortDropdown: React.FC<SortDropdownProps> = ({ sortOption, setSortOption }) => {
   return (
-    <RNPickerSelect
-      onValueChange={(value) => setSortOption(value)}
-      items={[
-        { label: 'Sort by Time', value: 'time' },
-        { label: 'Sort by Completion', value: 'completion' },
-      ]}
-      value={sortOption}
-      style={pickerSelectStyles}
-      placeholder={{ label: 'Select sort option...', value: null }}
-    />
+    <View style={styles.container}>
+      <RNPickerSelect
+        onValueChange={(value) => setSortOption(value)}
+        items={[
+          { label: 'Sort by Time', value: 'time' },
+          { label: 'Sort by Completion', value: 'completion' },
+        ]}
+        value={sortOption}
+        style={{
+          ...pickerSelectStyles,
+          viewContainer: {
+            ...pickerSelectStyles.inputIOS,
+            ...pickerSelectStyles.inputAndroid,
+          },
+        }}
+        placeholder={{ label: 'Select sort option...', value: null }}
+      />
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    marginVertical: 10,
+  },
+});
 
 const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
     fontSize: 16,
-    paddingHorizontal: 10,
-    paddingVertical: 12,
     borderWidth: 1,
+    paddingVertical: 6,
+    paddingHorizontal: 8,
     borderColor: Colors.light.primary,
     borderRadius: 4,
     color: 'white',
     backgroundColor: Colors.light.primary,
-    marginVertical: 10,
   },
   inputAndroid: {
     fontSize: 16,
-    paddingHorizontal: 10,
-    paddingVertical: 12,
     borderWidth: 1,
     borderColor: Colors.light.primary,
     borderRadius: 4,
     color: 'white',
     backgroundColor: Colors.light.primary,
-    marginVertical: 10,
   },
 });
 
