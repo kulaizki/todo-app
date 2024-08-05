@@ -1,3 +1,4 @@
+// TodoItem.tsx
 import React, { useState, useRef, useEffect } from "react";
 import {
   View,
@@ -11,6 +12,7 @@ import {
 import { TodoItemProps } from "@/types";
 import { Colors } from "@/constants/Colors";
 import { ThemedText } from "@/components/ThemedText";
+import { handleSave, handleKeyPress } from "@/utils/todo";
 
 const TodoItem: React.FC<TodoItemProps> = ({
   item,
@@ -20,30 +22,14 @@ const TodoItem: React.FC<TodoItemProps> = ({
   const [isEditing, setIsEditing] = useState(false);
   const [newText, setNewText] = useState(item.text);
   const inputRef = useRef<TextInput>(null);
-
   const colorScheme = useColorScheme();
-
   const borderBottomColor = colorScheme === 'dark' ? '#505050' : '#d6d6d6';
   const inputColor = colorScheme === 'dark' ? Colors.dark.text : Colors.light.text;
-
-  const handleSave = () => {
-    if (newText.trim()) {
-      editTodo(item.id, newText); // Call editTodo with the new text
-      setIsEditing(false);
-      Keyboard.dismiss(); // Dismiss keyboard after saving
-    }
-  };
-
-  const handleKeyPress = ({ nativeEvent }: any) => {
-    if (nativeEvent.key === 'Enter') {
-      handleSave();
-    }
-  };
 
   useEffect(() => {
     const handleTouchOutside = () => {
       if (inputRef.current && !inputRef.current.isFocused()) {
-        handleSave();
+        handleSave(newText, item.id, editTodo, setIsEditing, setNewText, inputRef);
       }
     };
 
@@ -52,10 +38,10 @@ const TodoItem: React.FC<TodoItemProps> = ({
     return () => {
       keyboardDidHideListener.remove();
     };
-  }, [isEditing]);
+  }, [isEditing, newText, editTodo]);
 
   return (
-    <TouchableWithoutFeedback onPress={() => { if (isEditing && inputRef.current && !inputRef.current.isFocused()) handleSave(); }}>
+    <TouchableWithoutFeedback onPress={() => { if (isEditing && inputRef.current && !inputRef.current.isFocused()) handleSave(newText, item.id, editTodo, setIsEditing, setNewText, inputRef); }}>
       <View style={[styles.item, { borderBottomColor }]}>
         <TouchableOpacity
           style={styles.toggle}
@@ -69,17 +55,13 @@ const TodoItem: React.FC<TodoItemProps> = ({
               ref={inputRef}
               value={newText}
               onChangeText={setNewText}
-              onSubmitEditing={handleSave} // Save when pressing "Enter/Return"
-              onKeyPress={handleKeyPress} 
+              onSubmitEditing={() => handleSave(newText, item.id, editTodo, setIsEditing, setNewText, inputRef)}
+              onKeyPress={(event) => handleKeyPress(event, () => handleSave(newText, item.id, editTodo, setIsEditing, setNewText, inputRef))}
               autoFocus
               style={[styles.input, { color: inputColor }]}
-              multiline // Allow multiline input
-              onBlur={() => { // Save when input loses focus
-                if (inputRef.current && !inputRef.current.isFocused()) {
-                  handleSave();
-                }
-              }}
-              blurOnSubmit={false} // Disable auto-blur on submit
+              multiline
+              onBlur={() => handleSave(newText, item.id, editTodo, setIsEditing, setNewText, inputRef)}
+              blurOnSubmit={false}
             />
           ) : (
             <ThemedText
@@ -98,7 +80,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
 const styles = StyleSheet.create({
   item: {
     flexDirection: "row",
-    alignItems: "flex-start", // Ensure vertical alignment is consistent
+    alignItems: "flex-start",
     padding: 12,
     borderBottomWidth: 1,
   },
@@ -108,7 +90,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
-    lineHeight: 24, 
+    lineHeight: 24,
   },
   completed: {
     textDecorationLine: "line-through",
@@ -133,13 +115,13 @@ const styles = StyleSheet.create({
   input: {
     fontSize: 16,
     lineHeight: 24,
-    textAlignVertical: 'top', 
+    textAlignVertical: 'top',
     borderColor: Colors.light.primary,
-    borderWidth: 1, 
-    borderRadius: 4, 
-    paddingHorizontal: 8, 
-    paddingVertical: 4, 
-    minHeight: 40, 
+    borderWidth: 1,
+    borderRadius: 4,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    minHeight: 40,
   },
 });
 

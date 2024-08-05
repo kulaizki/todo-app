@@ -1,5 +1,5 @@
 import { Todo } from '@/types/index';
-import { TextInput } from 'react-native';
+import { TextInput, Keyboard } from 'react-native';
 import React from 'react';
 
 export const addTodo = (
@@ -91,4 +91,28 @@ export const clearCompletedTasks = (
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>
 ) => {
   setTodos(todos.filter(todo => !todo.completed));
+};
+
+export const handleSave = (
+  newText: string,
+  itemId: string,
+  editTodo: (id: string, newText: string) => void,
+  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>,
+  setNewText: React.Dispatch<React.SetStateAction<string>>,
+  inputRef: React.RefObject<TextInput>
+) => {
+  if (newText.trim()) {
+    editTodo(itemId, newText); 
+    setIsEditing(false);
+    Keyboard.dismiss(); 
+  }
+};
+
+export const handleKeyPress = (
+  event: { nativeEvent: { key: string } },
+  handleSave: () => void
+) => {
+  if (event.nativeEvent.key === 'Enter') {
+    handleSave(); 
+  }
 };
