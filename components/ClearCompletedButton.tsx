@@ -6,7 +6,7 @@ import { ClearCompletedButtonProps } from "@/types";
 const ClearCompletedButton: React.FC<ClearCompletedButtonProps> = ({ onPress }) => {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
-      <Icon name="trash" size={24} color="#fff" />
+      <Icon name="trash" size={28} color="#fff" />
     </TouchableOpacity>
   );
 };
@@ -16,9 +16,9 @@ const styles = StyleSheet.create({
     position: "absolute",
     left: 16,
     bottom: 16,
-    width: 56,
-    height: 56,
-    borderRadius: 28,
+    width: 70,
+    height: 70,
+    borderRadius: 40,
     backgroundColor: '#343434', 
     justifyContent: "center",
     alignItems: "center",

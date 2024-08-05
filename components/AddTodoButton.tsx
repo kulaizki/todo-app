@@ -16,9 +16,9 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 16,
     bottom: 16,
-    width: 56,
-    height: 56,
-    borderRadius: 28,
+    width: 70,
+    height: 70,
+    borderRadius: 40,
     backgroundColor: Colors.light.primary,
     justifyContent: "center",
     alignItems: "center",
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   fabText: {
-    fontSize: 24,
+    fontSize: 32,
     color: "#fff",
   },
 });
