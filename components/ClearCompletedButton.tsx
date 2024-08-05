@@ -1,12 +1,12 @@
 import React from "react";
 import { TouchableOpacity, StyleSheet } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { ClearCompletedButtonProps } from "@/types";
 
 const ClearCompletedButton: React.FC<ClearCompletedButtonProps> = ({ onPress }) => {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
-      <Icon name="trash" size={28} color="#fff" />
+      <Icon name="broom" size={28} color="#fff" />
     </TouchableOpacity>
   );
 };
