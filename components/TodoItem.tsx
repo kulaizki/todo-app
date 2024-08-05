@@ -69,8 +69,8 @@ const TodoItem: React.FC<TodoItemProps> = ({
               ref={inputRef}
               value={newText}
               onChangeText={setNewText}
-              onSubmitEditing={handleSave} // Save when pressing "Enter"
-              onKeyPress={handleKeyPress} // Handle key presses
+              onSubmitEditing={handleSave} // Save when pressing "Enter/Return"
+              onKeyPress={handleKeyPress} 
               autoFocus
               style={[styles.input, { color: inputColor }]}
               multiline // Allow multiline input
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
-    lineHeight: 24, // Ensure line height matches your text spacing
+    lineHeight: 24, 
   },
   completed: {
     textDecorationLine: "line-through",
@@ -133,13 +133,13 @@ const styles = StyleSheet.create({
   input: {
     fontSize: 16,
     lineHeight: 24,
-    textAlignVertical: 'top', // Align text to the top
+    textAlignVertical: 'top', 
     borderColor: Colors.light.primary,
-    borderWidth: 1, // Add a border to make it look consistent
-    borderRadius: 4, // Rounded corners
-    paddingHorizontal: 8, // Consistent horizontal padding
-    paddingVertical: 4, // Add some vertical padding
-    minHeight: 40, // Minimum height to prevent squishing
+    borderWidth: 1, 
+    borderRadius: 4, 
+    paddingHorizontal: 8, 
+    paddingVertical: 4, 
+    minHeight: 40, 
   },
 });
 
