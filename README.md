@@ -1,50 +1,55 @@
-# Welcome to your Expo app 👋
+# To-Do List App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Project Description
 
-## Get started
+This To-Do List App is a simple yet functional mobile application built using React Native and Expo. It allows users to manage their tasks with features such as adding, editing, deleting, and marking tasks as completed. The app supports sorting tasks by creation date or completion status and includes persistent storage using AsyncStorage. The design is minimalistic and responsive, handling both light and dark modes seamlessly.
 
-1. Install dependencies
+## Setup Instructions
+
+### Prerequisites
+
+Ensure you have the following installed:
+- Node.js
+- Expo CLI (`npm install -g expo-cli`)
+
+### Installation
+
+1. **Clone the Repository**
+
+   ```bash
+   git clone https://github.com/kulaizki/todo-app.git
+   cd <repository-folder>
+   ```
+
+2. **Install Dependencies**
 
    ```bash
    npm install
    ```
-
-2. Start the app
+3. **Start Development Server**
 
    ```bash
-    npx expo start
+   npx expo start
    ```
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## List of Implemented Features
+- Task Management:
+   - Add new tasks
+   - Edit existing tasks
+   - Delete tasks
+   - Toggle task completion status
+- Task Display:
+   - List tasks with a minimalistic design
+- Sorting:
+   - Sort tasks by creation date (newest first)
+   - Sort tasks by completion status (completed items last)
+- Data Persistence:
+   - Persist tasks using AsyncStorage
+- User Interface:
+   - Responsive design that adapts to light and dark modes
+   - Input field for adding tasks with automatic focus and hiding
+- Additional Features:
+   - Clear completed tasks
+   - Sort tasks using a dropdown menu
+- Compatibility:
+  - Supports both iOS and Android
