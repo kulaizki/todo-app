@@ -98,12 +98,13 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     backgroundColor: "white",
+    borderWidth: 1,
+    borderRadius: 4,
+    borderColor: Colors.light.primary,
   },
   input: {
     height: 40,
-    borderColor: Colors.light.primary,
-    borderWidth: 1,
-    borderRadius: 4,
     paddingHorizontal: 8,
+    fontSize: 16,
   },
 });

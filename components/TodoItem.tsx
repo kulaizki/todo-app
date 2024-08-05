@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   View,
   TouchableOpacity,
   TextInput,
   StyleSheet,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import { TodoItemProps } from "@/types";
 import { Colors } from "@/constants/Colors";
 import { ThemedText } from "@/components/ThemedText";
+import { useThemeColor } from "@/hooks/useThemeColor";
 
 const TodoItem: React.FC<TodoItemProps> = ({
   item,
@@ -16,58 +19,95 @@ const TodoItem: React.FC<TodoItemProps> = ({
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [newText, setNewText] = useState(item.text);
+  const inputRef = useRef<TextInput>(null);
+
+  // Get the theme colors
+  const inputColor = useThemeColor({ light: Colors.light.text, dark: Colors.dark.text }, 'text');
 
   const handleSave = () => {
     if (newText.trim()) {
       editTodo(item.id, newText); // Call editTodo with the new text
       setIsEditing(false);
+      Keyboard.dismiss(); // Dismiss keyboard after saving
     }
   };
 
+  const handleKeyPress = ({ nativeEvent }: any) => {
+    if (nativeEvent.key === 'Enter') {
+      handleSave();
+    }
+  };
+
+  useEffect(() => {
+    const handleTouchOutside = () => {
+      if (inputRef.current && !inputRef.current.isFocused()) {
+        handleSave();
+      }
+    };
+
+    const keyboardDidHideListener = Keyboard.addListener("keyboardDidHide", handleTouchOutside);
+
+    return () => {
+      keyboardDidHideListener.remove();
+    };
+  }, [isEditing]);
+
   return (
-    <View style={styles.item}>
-      <TouchableOpacity
-        style={styles.toggle}
-        onPress={() => toggleCompleted(item.id)}
-      >
-        {item.completed && <View style={styles.innerCircle} />}
-      </TouchableOpacity>
-      <View style={styles.textContainer}>
-        {isEditing ? (
-          <TextInput
-            value={newText}
-            onChangeText={setNewText}
-            onSubmitEditing={handleSave}
-            autoFocus
-            style={styles.input}
-          />
-        ) : (
-          <ThemedText
-            style={[styles.text, item.completed ? styles.completed : null]}
-            onPress={() => setIsEditing(true)}
-          >
-            {item.text}
-          </ThemedText>
-        )}
+    <TouchableWithoutFeedback onPress={() => { if (isEditing && inputRef.current && !inputRef.current.isFocused()) handleSave(); }}>
+      <View style={styles.item}>
+        <TouchableOpacity
+          style={styles.toggle}
+          onPress={() => toggleCompleted(item.id)}
+        >
+          {item.completed && <View style={styles.innerCircle} />}
+        </TouchableOpacity>
+        <View style={styles.textContainer}>
+          {isEditing ? (
+            <TextInput
+              ref={inputRef}
+              value={newText}
+              onChangeText={setNewText}
+              onSubmitEditing={handleSave} // Save when pressing "Enter"
+              onKeyPress={handleKeyPress} // Handle key presses
+              autoFocus
+              style={[styles.input, { color: inputColor }]}
+              multiline // Allow multiline input
+              onBlur={() => { // Save when input loses focus
+                if (inputRef.current && !inputRef.current.isFocused()) {
+                  handleSave();
+                }
+              }}
+              blurOnSubmit={false} // Disable auto-blur on submit
+            />
+          ) : (
+            <ThemedText
+              style={[styles.text, item.completed ? styles.completed : null]}
+              onPress={() => setIsEditing(true)}
+            >
+              {item.text}
+            </ThemedText>
+          )}
+        </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 
 const styles = StyleSheet.create({
   item: {
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "flex-start", // Ensure vertical alignment is consistent
     padding: 12,
     borderBottomWidth: 1,
-    borderBottomColor: "#ddd",
+    borderBottomColor: '#505050',
   },
   textContainer: {
     flex: 1,
     marginLeft: 16,
   },
   text: {
-    fontSize: 18,
+    fontSize: 16,
+    lineHeight: 24, // Ensure line height matches your text spacing
   },
   completed: {
     textDecorationLine: "line-through",
@@ -90,7 +130,15 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.light.primary,
   },
   input: {
-    fontSize: 18,
+    fontSize: 16,
+    lineHeight: 24,
+    textAlignVertical: 'top', // Align text to the top
+    borderColor: Colors.light.primary,
+    borderWidth: 1, // Add a border to make it look consistent
+    borderRadius: 4, // Rounded corners
+    paddingHorizontal: 8, // Consistent horizontal padding
+    paddingVertical: 4, // Add some vertical padding
+    minHeight: 40, // Minimum height to prevent squishing
   },
 });
 
