@@ -1,4 +1,3 @@
-// TodoItem.tsx
 import React, { useState, useRef, useEffect } from "react";
 import {
   View,
@@ -13,11 +12,14 @@ import { TodoItemProps } from "@/types";
 import { Colors } from "@/constants/Colors";
 import { ThemedText } from "@/components/ThemedText";
 import { handleSave, handleKeyPress } from "@/utils/todo";
+import DeleteButton from "@/components/DeleteButton";
 
 const TodoItem: React.FC<TodoItemProps> = ({
   item,
   toggleCompleted,
   editTodo,
+  todos,
+  setTodos
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [newText, setNewText] = useState(item.text);
@@ -41,7 +43,11 @@ const TodoItem: React.FC<TodoItemProps> = ({
   }, [isEditing, newText, editTodo]);
 
   return (
-    <TouchableWithoutFeedback onPress={() => { if (isEditing && inputRef.current && !inputRef.current.isFocused()) handleSave(newText, item.id, editTodo, setIsEditing, setNewText, inputRef); }}>
+    <TouchableWithoutFeedback onPress={() => { 
+      if (isEditing && inputRef.current && !inputRef.current.isFocused()) {
+        handleSave(newText, item.id, editTodo, setIsEditing, setNewText, inputRef);
+      }
+    }}>
       <View style={[styles.item, { borderBottomColor }]}>
         <TouchableOpacity
           style={styles.toggle}
@@ -72,6 +78,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
             </ThemedText>
           )}
         </View>
+        <DeleteButton id={item.id} todos={todos} setTodos={setTodos} /> 
       </View>
     </TouchableWithoutFeedback>
   );
@@ -80,8 +87,8 @@ const TodoItem: React.FC<TodoItemProps> = ({
 const styles = StyleSheet.create({
   item: {
     flexDirection: "row",
-    alignItems: "flex-start",
-    padding: 12,
+    alignItems: "center",
+    padding: 8,
     borderBottomWidth: 1,
   },
   textContainer: {

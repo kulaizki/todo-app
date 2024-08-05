@@ -82,6 +82,7 @@ export default function HomeScreen() {
           todos={sortedTodos}
           toggleCompleted={(id) => toggleCompleted(todos, setTodos, id)}
           editTodo={(id, newText) => editTodo(id, newText, todos, setTodos)}
+          setTodos={setTodos} // Pass setTodos here
         />
       </ParallaxScrollView>
       <AddTodoButton

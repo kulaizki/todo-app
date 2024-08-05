@@ -6,7 +6,10 @@ export interface TodoItemProps {
   };
   toggleCompleted: (id: string) => void;
   editTodo: (id: string, newText: string) => void;
+  todos: Todo[];
+  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }
+
 
 export interface Todo {
   id: string;
@@ -19,7 +22,9 @@ export interface TodoListProps {
   todos: Todo[];
   toggleCompleted: (id: string) => void;
   editTodo: (id: string, newText: string) => void;
+  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;  // Add this line
 }
+
 
 export interface SortButtonProps {
   title: string;
@@ -38,4 +43,10 @@ export interface SortButtonsContainerProps {
 
 export interface ClearCompletedButtonProps {
   onPress: () => void;
+}
+
+export interface DeleteButtonProps {
+  id: string;
+  todos: Todo[];
+  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }

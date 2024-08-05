@@ -7,6 +7,7 @@ const TodoList: React.FC<TodoListProps> = ({
   todos,
   toggleCompleted,
   editTodo,
+  setTodos,  
 }) => {
   return (
     <SafeAreaView>
@@ -16,6 +17,8 @@ const TodoList: React.FC<TodoListProps> = ({
           item={todo}
           toggleCompleted={toggleCompleted}
           editTodo={editTodo}
+          todos={todos}           
+          setTodos={setTodos}    
         />
       ))}
     </SafeAreaView>
