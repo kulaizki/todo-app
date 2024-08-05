@@ -6,11 +6,11 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
+  useColorScheme
 } from "react-native";
 import { TodoItemProps } from "@/types";
 import { Colors } from "@/constants/Colors";
 import { ThemedText } from "@/components/ThemedText";
-import { useThemeColor } from "@/hooks/useThemeColor";
 
 const TodoItem: React.FC<TodoItemProps> = ({
   item,
@@ -21,8 +21,12 @@ const TodoItem: React.FC<TodoItemProps> = ({
   const [newText, setNewText] = useState(item.text);
   const inputRef = useRef<TextInput>(null);
 
-  // Get the theme colors
-  const inputColor = useThemeColor({ light: Colors.light.text, dark: Colors.dark.text }, 'text');
+  // Get the color scheme
+  const colorScheme = useColorScheme();
+
+  // Define colors for light and dark modes
+  const borderBottomColor = colorScheme === 'dark' ? '#505050' : '#d6d6d6';
+  const inputColor = colorScheme === 'dark' ? Colors.dark.text : Colors.light.text;
 
   const handleSave = () => {
     if (newText.trim()) {
@@ -54,7 +58,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
 
   return (
     <TouchableWithoutFeedback onPress={() => { if (isEditing && inputRef.current && !inputRef.current.isFocused()) handleSave(); }}>
-      <View style={styles.item}>
+      <View style={[styles.item, { borderBottomColor }]}>
         <TouchableOpacity
           style={styles.toggle}
           onPress={() => toggleCompleted(item.id)}
@@ -99,7 +103,6 @@ const styles = StyleSheet.create({
     alignItems: "flex-start", // Ensure vertical alignment is consistent
     padding: 12,
     borderBottomWidth: 1,
-    borderBottomColor: '#505050',
   },
   textContainer: {
     flex: 1,
