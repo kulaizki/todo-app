@@ -49,7 +49,7 @@ export default function HomeScreen() {
           />
         }
       >
-        <ThemedView style={styles.titleContainer}>
+        <ThemedView>
           <ThemedText type="title">Tasks</ThemedText>
         </ThemedView>
         {isAdding && (
@@ -95,11 +95,6 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
   inputContainer: {
     backgroundColor: "white",
     borderWidth: 1,
