@@ -52,7 +52,6 @@ export default function HomeScreen() {
         <ThemedView style={styles.titleContainer}>
           <ThemedText type="title">Tasks</ThemedText>
         </ThemedView>
-        <ThemedText type='defaultSemiBold'>What do we have to complete today?</ThemedText>
         {isAdding && (
           <View style={styles.inputContainer}>
             <TextInput
