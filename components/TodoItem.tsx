@@ -1,14 +1,13 @@
-// TodoItem.tsx
 import React, { useState } from "react";
 import {
   View,
-  Text,
-  StyleSheet,
   TouchableOpacity,
   TextInput,
+  StyleSheet,
 } from "react-native";
 import { TodoItemProps } from "@/types";
 import { Colors } from "@/constants/Colors";
+import { ThemedText } from "@/components/ThemedText";
 
 const TodoItem: React.FC<TodoItemProps> = ({
   item,
@@ -43,12 +42,12 @@ const TodoItem: React.FC<TodoItemProps> = ({
             style={styles.input}
           />
         ) : (
-          <Text
+          <ThemedText
             style={[styles.text, item.completed ? styles.completed : null]}
             onPress={() => setIsEditing(true)}
           >
             {item.text}
-          </Text>
+          </ThemedText>
         )}
       </View>
     </View>
