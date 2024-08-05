@@ -193,3 +193,15 @@ export const handleKeyPress = (
     console.error('Failed to handle key press:', error);
   }
 };
+
+export const handleDelete = async (
+  todos: Todo[],
+  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>,
+  id: string
+) => {
+  try {
+    await deleteTodo(todos, setTodos, id);
+  } catch (error) {
+    console.error('Failed to delete todo:', error);
+  }
+};

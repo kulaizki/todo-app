@@ -1,25 +1,25 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'; // Ensure correct import
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'; 
 import { Colors } from '@/constants/Colors';
 import { DeleteButtonProps } from '@/types/index';
-import { deleteTodo } from '@/utils/todo';
+import { handleDelete } from '@/utils/todo';
 
 const DeleteButton: React.FC<DeleteButtonProps> = ({ id, todos, setTodos }) => {
-  const handleDelete = async () => {
+  const onPress = async () => {
     try {
       if (todos && setTodos) {
-        await deleteTodo(todos, setTodos, id);
+        await handleDelete(todos, setTodos, id);
       } else {
         console.warn('Todos or setTodos is missing');
       }
     } catch (error) {
-      console.error('Failed to delete todo:', error);
+      console.error('Failed to handle delete:', error);
     }
   };
 
   return (
-    <TouchableOpacity style={styles.button} onPress={handleDelete}>
+    <TouchableOpacity style={styles.button} onPress={onPress}>
       <Icon name="trash-can-outline" size={24} color={Colors.light.danger} />
     </TouchableOpacity>
   );

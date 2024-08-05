@@ -73,6 +73,8 @@ export default function HomeScreen() {
               <ThemedText type="title">Tasks</ThemedText>
             </ThemedView>
             <SortDropdown sortOption={sortOption} setSortOption={setSortOption} />
+
+            {/* Shows new task input field when isAdding is true */}
             {isAdding && (
               <View style={getDynamicStyles(colorScheme).inputContainer}>
                 <TextInput
@@ -95,12 +97,15 @@ export default function HomeScreen() {
                 />
               </View>
             )}
+
+            {/* List of tasks */}
             <TodoList
               todos={sortedTodos}
               toggleCompleted={(id) => toggleCompleted(todos, setTodos, id)}
               editTodo={(id, newText) => editTodo(id, newText, todos, setTodos)}
               setTodos={setTodos}
             />
+            
           </ParallaxScrollView>
           <AddTodoButton
             onPress={() => handleAddButtonPress(setIsAdding, inputRef)}
