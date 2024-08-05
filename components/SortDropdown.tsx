@@ -34,12 +34,12 @@ const pickerSelectStyles = StyleSheet.create({
   inputAndroid: {
     fontSize: 16,
     paddingHorizontal: 10,
-    paddingVertical: 8,
+    paddingVertical: 12,
     borderWidth: 1,
     borderColor: Colors.light.primary,
     borderRadius: 4,
-    color: Colors.light.primary,
-    backgroundColor: 'white',
+    color: 'white',
+    backgroundColor: Colors.light.primary,
     marginVertical: 10,
   },
 });

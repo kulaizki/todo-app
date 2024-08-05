@@ -67,7 +67,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
               style={[styles.input, { color: inputColor }]}
               multiline
               onBlur={() => handleSave(newText, item.id, editTodo, setIsEditing, setNewText, inputRef)}
-              blurOnSubmit={false}
+              blurOnSubmit={true}
             />
           ) : (
             <ThemedText
