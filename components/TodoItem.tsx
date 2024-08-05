@@ -21,10 +21,8 @@ const TodoItem: React.FC<TodoItemProps> = ({
   const [newText, setNewText] = useState(item.text);
   const inputRef = useRef<TextInput>(null);
 
-  // Get the color scheme
   const colorScheme = useColorScheme();
 
-  // Define colors for light and dark modes
   const borderBottomColor = colorScheme === 'dark' ? '#505050' : '#d6d6d6';
   const inputColor = colorScheme === 'dark' ? Colors.dark.text : Colors.light.text;
 
