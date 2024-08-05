@@ -14,7 +14,7 @@ const ClearCompletedButton: React.FC<ClearCompletedButtonProps> = ({ onPress }) 
 const styles = StyleSheet.create({
   button: {
     position: "absolute",
-    left: 16,
+    left: 24,
     bottom: 16,
     width: 70,
     height: 70,

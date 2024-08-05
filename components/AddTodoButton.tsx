@@ -14,7 +14,7 @@ const AddTodoButton: React.FC<AddTodoButtonProps> = ({ onPress }) => {
 const styles = StyleSheet.create({
   fab: {
     position: "absolute",
-    right: 16,
+    right: 24,
     bottom: 16,
     width: 70,
     height: 70,
