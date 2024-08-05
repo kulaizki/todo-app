@@ -1,5 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
-import { View, TextInput, StyleSheet, SafeAreaView, useColorScheme, TouchableWithoutFeedback, Keyboard } from "react-native";
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  SafeAreaView,
+  useColorScheme,
+  Keyboard,
+  TouchableWithoutFeedback
+} from "react-native";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
@@ -38,8 +46,12 @@ export default function HomeScreen() {
   const sortedTodos = sortTodos(todos, sortOption);
 
   const handlePressOutside = () => {
-    Keyboard.dismiss(); // Dismiss the keyboard
+    Keyboard.dismiss(); // Hide the keyboard
     setIsAdding(false); // Hide the input view
+  };
+
+  const handleInputBlur = () => {
+    setIsAdding(false); // Hide the input view on blur
   };
 
   return (
@@ -79,7 +91,7 @@ export default function HomeScreen() {
                     )
                   }
                   returnKeyType="done"
-                  onBlur={() => setIsAdding(false)} // Hide the input view on blur
+                  onBlur={handleInputBlur} // Handle blur event
                 />
               </View>
             )}
