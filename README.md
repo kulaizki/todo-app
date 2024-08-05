@@ -18,6 +18,8 @@ Ensure you have the following installed:
 
    ```bash
    git clone https://github.com/kulaizki/todo-app.git
+   ```
+   ```bash
    cd <repository-folder>
    ```
 
