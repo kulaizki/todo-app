@@ -27,8 +27,8 @@ const pickerSelectStyles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.light.primary,
     borderRadius: 4,
-    color: Colors.light.primary,
-    backgroundColor: 'white',
+    color: 'white',
+    backgroundColor: Colors.light.primary,
     marginVertical: 10,
   },
   inputAndroid: {
