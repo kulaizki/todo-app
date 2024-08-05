@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { View, TextInput, StyleSheet, SafeAreaView } from "react-native";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
@@ -14,21 +14,25 @@ import {
   editTodo,
   sortTodos,
   clearCompletedTasks,
+  getTodosFromStorage
 } from "@/utils/todo";
 import { Todo } from "@/types/index";
 import SortButtonsContainer from "@/components/SortButtonsContainer";
 
 export default function HomeScreen() {
-  const [todos, setTodos] = useState<Todo[]>([
-    { id: "1", text: "First quest", completed: false, createdAt: new Date() },
-    { id: "2", text: "Second quest", completed: false, createdAt: new Date() },
-    { id: "3", text: "This description is super super duper super duper super super super long", completed: false, createdAt: new Date() },
-  ]);
-
+  const [todos, setTodos] = useState<Todo[]>([]);
   const [inputText, setInputText] = useState<string>("");
   const [isAdding, setIsAdding] = useState<boolean>(false);
   const [sortOption, setSortOption] = useState<"time" | "completion">("time");
   const inputRef = useRef<TextInput>(null);
+
+  useEffect(() => {
+    const fetchTodos = async () => {
+      const storedTodos = await getTodosFromStorage();
+      setTodos(storedTodos);
+    };
+    fetchTodos();
+  }, []);
 
   const sortedTodos = sortTodos(todos, sortOption);
 
