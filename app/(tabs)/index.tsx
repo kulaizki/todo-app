@@ -105,7 +105,7 @@ export default function HomeScreen() {
               editTodo={(id, newText) => editTodo(id, newText, todos, setTodos)}
               setTodos={setTodos}
             />
-            
+
           </ParallaxScrollView>
           <AddTodoButton
             onPress={() => handleAddButtonPress(setIsAdding, inputRef)}
