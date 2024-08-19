@@ -93,6 +93,7 @@ export default function HomeScreen() {
                     )
                   }
                   returnKeyType="done"
+                  autoCapitalize="none"
                   onBlur={handleInputBlur} // Handle blur event
                 />
               </View>
